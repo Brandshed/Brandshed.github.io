@@ -651,7 +651,7 @@ nav.scrolled .logo img {
 .testimonials-section {
   background: var(--warm);
   color: var(--charcoal);
-  padding: 120px 48px;
+  padding: 120px 48px 0 48px;   /* bottom padding set to 0 */
   position: relative;
   width: 100%;
   overflow-x: hidden;
@@ -763,10 +763,24 @@ nav.scrolled .logo img {
   color: var(--slate);
 }
 
+/* Gradient bleed between testimonials and packages */
+.testimonials-section::after {
+  content: '';
+  display: block;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--warm) 0%, var(--cream) 100%);
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  margin-top: 0;
+}
+
 /* Packages (light) */
 .packages-section {
   background: var(--cream);
   padding: 0 48px 120px;
+  margin-top: -1px;        /* kills any browser rendering gap */
   width: 100%;
   overflow-x: hidden;
 }
