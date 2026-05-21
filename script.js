@@ -222,8 +222,13 @@ Thank you!`;
 
       messageField.value = prefillMessage;
 
-      // Smooth scroll to contact section
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Scroll directly to the contact form (so the input boxes are visible)
+      const contactFormElement = document.getElementById('contactForm');
+      if (contactFormElement) {
+        contactFormElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
 
       // Optional: highlight the message field briefly
       messageField.style.transition = 'box-shadow 0.3s';
