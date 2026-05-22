@@ -1759,3 +1759,16 @@ img {
   width: 100%;
   max-width: 100%;
 }
+
+/* FAQ "Show more" button */
+#faqToggleBtn {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+#faqToggleBtn:hover {
+    background: var(--sage-subtle);
+    border-color: var(--sage);
+}
+.faq-item.hidden-faq {
+    display: none;
+}
