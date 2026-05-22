@@ -163,6 +163,8 @@ function initReadMore() {
     });
 }
 
+
+
 // Run on load and on window resize (to re-run if orientation changes)
 window.addEventListener('load', () => {
     initReadMore();
@@ -242,3 +244,59 @@ Thank you!`;
     }
   });
 });
+
+// ========== FAQ "SHOW MORE / SHOW LESS" (fixed) ==========
+(function() {
+    const faqList = document.querySelector('.faq-list');
+    if (!faqList) return;
+
+    const allFaQs = Array.from(document.querySelectorAll('.faq-item'));
+    const total = allFaQs.length;
+    const VISIBLE_COUNT = 5;
+
+    // If 5 or fewer, hide the button and exit
+    if (total <= VISIBLE_COUNT) {
+        const btnContainer = document.querySelector('.faq-more-btn-container');
+        if (btnContainer) btnContainer.style.display = 'none';
+        return;
+    }
+
+    // Store indices of items that start hidden (index >= 5)
+    const hiddenIndices = [];
+    for (let i = VISIBLE_COUNT; i < total; i++) {
+        hiddenIndices.push(i);
+        allFaQs[i].classList.add('hidden-faq');
+    }
+
+    const toggleBtn = document.getElementById('faqToggleBtn');
+    if (!toggleBtn) return;
+
+    let expanded = false;
+
+    function setHiddenState(expand) {
+        const currentItems = document.querySelectorAll('.faq-item');
+        hiddenIndices.forEach(idx => {
+            if (currentItems[idx]) {
+                if (expand) {
+                    currentItems[idx].classList.remove('hidden-faq');
+                } else {
+                    currentItems[idx].classList.add('hidden-faq');
+                }
+            }
+        });
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        if (!expanded) {
+            setHiddenState(true);
+            toggleBtn.innerHTML = 'Show less ↑';
+            expanded = true;
+        } else {
+            setHiddenState(false);
+            toggleBtn.innerHTML = 'Show more ↓';
+            expanded = false;
+        }
+    });
+})();
+
+
